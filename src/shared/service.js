@@ -6,6 +6,15 @@ export default {
       .then(this.extractData)
       .catch(this.handleError);
   },
+  getContactSources() {
+    return Vue.http.get('contact_sources')
+      .then(this.extractData);
+  },
+  addContact(data) {
+    return Vue.http.post('contacts', data)
+      .then(this.extractData)
+      .catch(this.handleError);
+  },
   extractData(response) {
     const body = response.json();
     return body || {};
