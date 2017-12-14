@@ -11,14 +11,7 @@ export default {
     return body || {};
   },
   handleError(error) {
-    let errMsg;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
+    const errMsg = `${error.status} - ${error.statusText || ''} ${error.url}`;
     throw new Error(errMsg);
   },
 };
