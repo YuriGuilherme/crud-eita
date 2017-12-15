@@ -6,19 +6,21 @@ export default {
       .then(this.extractData)
       .catch(this.handleError);
   },
+  getContactSources() {
+    return Vue.http.get('contact_sources')
+      .then(this.extractData);
+  },
+  addContact(data) {
+    return Vue.http.post('contacts', data)
+      .then(this.extractData)
+      .catch(this.handleError);
+  },
   extractData(response) {
     const body = response.json();
     return body || {};
   },
   handleError(error) {
-    let errMsg;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
+    const errMsg = `${error.status} - ${error.statusText || ''} ${error.url}`;
     throw new Error(errMsg);
   },
 };

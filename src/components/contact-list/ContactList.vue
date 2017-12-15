@@ -16,7 +16,7 @@
           </router-link>
         </div>
       </div>
-      <div class="card-content" v-if="contacts">
+      <div class="card-content">
         <div class="filter-tags" v-if="contacts.length != 0">
           <div class="title">
             <span>Tags</span>
@@ -29,7 +29,7 @@
         </div>
         
         <ul class="list">
-          <div class="search-contact">
+          <div class="search-contact" v-if="contacts.length != 0">
             <input class="form-control" placeholder="Pesquisar contato" type="text" v-model="searchText" >
           </div>
           <li class="contact" v-for="contact in filteredList">
@@ -73,7 +73,9 @@
       <div class="contact-add-new" v-if="contacts.length == 0">
         <h3>Você ainda não possui contatos cadastrados</h3>
         <span>Deseja cadastrar um novo contato?</span>
-        <button class="btn btn-primary" title="cadastrar contato">Cadastrar novo contato</button>
+        <router-link :to="'/new'">
+          <button class="btn btn-primary" title="cadastrar contato">Cadastrar novo contato</button>
+        </router-link>
       </div>
     </section>
   
