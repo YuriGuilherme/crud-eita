@@ -32,7 +32,7 @@
           <div class="search-contact" v-if="contacts.length != 0">
             <input class="form-control" placeholder="Pesquisar contato" type="text" :value="searchText" @input="inputSearchText($event.target.value)">
           </div>
-          <li class="contact" v-for="contact in filterContacts">
+          <li class="contact" :key="contact.id" v-for="contact in filterContacts">
             <div class="contact-starred">
               <i class="fa" :class="contact.starred? 'fa-star': 'fa-star-o'"></i>
             </div>
@@ -47,7 +47,7 @@
                 <div class="phone-list">
                   <span>Telefones:</span>
                   <ul>
-                    <li v-for="phone in contact.phones">
+                    <li :key="index" v-for="(phone, index) in contact.phones">
                       <span>({{phone.code}}) {{ phone.number | formatPhoneNumber}}</span>
                     </li>
                   </ul>
@@ -55,7 +55,7 @@
                 <div class="email-list">
                   <span>Emails:</span>
                   <ul class="">
-                    <li v-for="email in contact.emails">
+                    <li :key="index" v-for="(email, index) in contact.emails">
                       <span>{{email.address}}</span>
                     </li>
                   </ul>
