@@ -1,9 +1,10 @@
 import { TheMask } from 'vue-the-mask';
+import VeeValidate from 'vee-validate';
 import service from '../../shared/service';
 
 const getDefaultData = () => {
   return {
-    loading_contacts: false,
+    sending_contact: false,
     contact_sources: [],
     newContact: {
       name: "",
@@ -48,8 +49,11 @@ export default {
         .then(data => this.contact_sources = data);
     },
     validateBeforeSubmit() {
-      service.addContact(this.handleData(this.newContact))
-        .then(res => this.resetData());
+      this.$validator.validateAll();
+      if (!!this.newContact.name && !this.errors.any()) {
+        this.sending_contact = true;
+        this.submitForm();
+      }
     },
     AddPhoneNumber() {
       this.newContact.phones.push({
@@ -61,6 +65,13 @@ export default {
       this.newContact.emails.push({
         address: '',
       });
+    },
+    submitForm() {
+      service.addContact(this.handleData(this.newContact))
+        .then(response => {
+          this.sending_contact = false;
+          this.resetData();
+        });
     },
     resetData() {
       this.$data.newContact = getDefaultData().newContact
