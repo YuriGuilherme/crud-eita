@@ -22,7 +22,7 @@
             <label for="origin">Origem do contato</label>
             <select name="origin" v-model="newContact.contact_source_id" v-validate="'required'">
               <option value="" disabled>Selecione a origem do contato</option>
-              <option v-for="contact in contact_sources" :key="contact.id" v-bind:value="contact.id">{{contact.name}}</option>
+              <option v-for="contact in contactSources" :key="contact.id" v-bind:value="contact.id">{{contact.name}}</option>
             </select>
             <i v-show="errors.has('origin')" class="fa fa-warning"></i>
             <span v-show="errors.has('origin')" class="help is-danger">Este campo é obrigatorio!</span>
@@ -34,18 +34,18 @@
           <div class="form-group">
             <label for="phone">Telefone</label>
             <the-mask :mask="['(##) ####-####', '(##) #####-####']" type="text" name="phone" :key="index" v-for="(phone, index) in newContact.phones" v-model="phone.number" placeholder="(11)98765-4321" />
-            <button type="button" @click="AddPhoneNumber">Adicionar telefone</button>
+            <button type="button" @click="addPhoneNumber">Adicionar telefone</button>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
             <input type="email" name="email" :key="index" v-for="(email, index) in newContact.emails" v-model="email.address" placeholder="exemplo@email.com">
-            <button type="button" @click="AddEmailAddress">Adicionar Email</button>
+            <button type="button" @click="addEmailAddress">Adicionar Email</button>
           </div>
           <div class="form-group">
             <button class="btn" type="submit">Salvar Contato</button>
           </div>
         </form>
-        <div class="loading-data" :class="{'active': sending_contact}">
+        <div class="loading-data" :class="{'active': isSendingContact}">
           <div class="loading-icon">
             <i class="fa fa-circle-o-notch"></i>
           </div>
