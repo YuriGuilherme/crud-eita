@@ -1,39 +1,18 @@
-import service from '../../shared/service';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      searchText: '',
-      filterTags: {
-        starred: true,
-        notStarred: true
-      },
-      contacts: [],
-      isLoadingData: true,
-    }
-  },
   created() {
-    service.getContacts() 
-      .then(data => {
-        this.contacts = data.contacts;
-        this.isLoadingData = false;
-      })
-      .catch(error => this.isLoadingData = false)
+    this.$store.dispatch('getContacts');
   },
-  computed: {
-    filteredList() {
-      return this.contacts.filter(contact => {
-        const isNameIncludeInArray = contact.name.toLowerCase().includes(this.searchText.toLowerCase());
-        return (
-          (this.filterTags.notStarred && !contact.starred && isNameIncludeInArray) || 
-          (this.filterTags.starred && contact.starred && isNameIncludeInArray)
-        ) 
-      })
-    }
-  },
-  methods: {
-    changeFilterTag(tag) {
-      this.filterTags[tag] = !this.filterTags[tag]
-    }
-  }
+  computed: mapGetters({
+    contacts: 'getContacts',
+    isLoadingData: 'isLoadingData',
+    searchText: 'searchText',
+    filterTags: 'filterTags',
+    filterContacts: 'filterContacts',
+  }),
+  methods: mapActions([
+    'changeFilterTag',
+    'inputSearchText'
+  ])
 };
