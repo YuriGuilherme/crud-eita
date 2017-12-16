@@ -30,9 +30,9 @@
         
         <ul class="list">
           <div class="search-contact" v-if="contacts.length != 0">
-            <input class="form-control" placeholder="Pesquisar contato" type="text" v-model="searchText" >
+            <input class="form-control" placeholder="Pesquisar contato" type="text" :value="searchText" @input="inputSearchText($event.target.value)">
           </div>
-          <li class="contact" v-for="contact in filteredList">
+          <li class="contact" v-for="contact in filterContacts">
             <div class="contact-starred">
               <i class="fa" :class="contact.starred? 'fa-star': 'fa-star-o'"></i>
             </div>
