@@ -1,7 +1,7 @@
 import service from '../../shared/service';
 import * as types from '../mutation-types';
 
-const state = {
+const initialState = {
   contacts: [],
   searchText: '',
   isLoadingData: true,
@@ -11,15 +11,15 @@ const state = {
   },
 };
 
-const filterContacts = (state) => {
+function filterContacts(state) {
   return state.contacts.filter((contact) => {
     const isNameIncludeInArray = contact.name.toLowerCase().includes(state.searchText);
     return (
-      (state.filterTags.notStarred && !contact.starred && isNameIncludeInArray) || 
+      (state.filterTags.notStarred && !contact.starred && isNameIncludeInArray) ||
       (state.filterTags.starred && contact.starred && isNameIncludeInArray)
     );
   });
-};
+}
 
 const getters = {
   getContacts: state => state.contacts,
@@ -36,16 +36,16 @@ const actions = {
         commit(types.RECEIVE_CONTACTS, {
           contacts: data.contacts,
         });
-        commit(types.CHANGE_IS_LOADING_DATA)
+        commit(types.CHANGE_IS_LOADING_DATA);
       })
-      .catch(error => commit(types.CHANGE_IS_LOADING_DATA));
+      .catch(() => commit(types.CHANGE_IS_LOADING_DATA));
   },
   changeFilterTag({ commit }, tag) {
     commit(types.CHANGE_FILTER_TAG, { tag });
   },
   inputSearchText({ commit }, searchText) {
     commit(types.INPUT_SEARCH_TEXT, { searchText });
-  }
+  },
 };
 
 const mutations = {
@@ -64,7 +64,7 @@ const mutations = {
 };
 
 export default {
-  state,
+  state: initialState,
   mutations,
   actions,
   getters,
