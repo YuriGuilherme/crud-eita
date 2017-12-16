@@ -75,6 +75,40 @@
 .contact-add-new span 
   margin-bottom: 20px
 
+#contact-info
+  position: absolute
+  top: 0
+  width: 0%
+  right: 0
+  bottom: 0
+  opacity: 0
+  background-color: white
+  border-radius: 4px
+  transition: width .5s
+
+#contact-info.expanded
+  position: absolute
+  top: 0
+  width: 100%
+  right: 0
+  bottom: 0
+  opacity: 1
+  background-color: white
+  border-radius: 4px
+  transition: width .5s
+
 @media screen and (min-width: 480px)
   .filter-tags
     display: initial
+  #contact-info
+    right: 0
+    width: 0
+    opacity: 0
+    border-radius: 0 4px 4px 0
+    box-shadow: 0 0 10px 0 #ddd
+  #contact-info.expanded
+    right: 0
+    opacity: 1
+    border-radius: 0 4px 4px 0
+    width: 240px
+    box-shadow: 0 0 10px 0 #ddd

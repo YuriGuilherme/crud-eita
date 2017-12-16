@@ -9,6 +9,8 @@ const initialState = {
     starred: true,
     notStarred: true,
   },
+  selectedContact: {},
+  contactInfoExpanded: false,
 };
 
 function filterContacts(state) {
@@ -27,6 +29,8 @@ const getters = {
   isLoadingData: state => state.isLoadingData,
   filterTags: state => state.filterTags,
   filterContacts: state => filterContacts(state),
+  selectedContact: state => state.selectedContact,
+  contactInfoExpanded: state => state.contactInfoExpanded,
 };
 
 const actions = {
@@ -46,6 +50,15 @@ const actions = {
   inputSearchText({ commit }, searchText) {
     commit(types.INPUT_SEARCH_TEXT, { searchText });
   },
+  showContactInformations({ commit }, contactId) {
+    service.getSpecificContact(contactId)
+      .then((data) => {
+        commit(types.SHOW_CONTACT_INFORMATIONS, { contact: data });
+      });
+  },
+  closeContacInformations({ commit }) {
+    commit(types.CLOSE_CONTACT_INFORMATIONS);
+  },
 };
 
 const mutations = {
@@ -60,6 +73,13 @@ const mutations = {
   },
   [types.INPUT_SEARCH_TEXT](state, { searchText }) {
     state.searchText = searchText;
+  },
+  [types.SHOW_CONTACT_INFORMATIONS](state, { contact }) {
+    state.contactInfoExpanded = true;
+    state.selectedContact = contact;
+  },
+  [types.CLOSE_CONTACT_INFORMATIONS](state) {
+    state.contactInfoExpanded = false;
   },
 };
 

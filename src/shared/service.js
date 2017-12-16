@@ -10,6 +10,11 @@ export default {
     return Vue.http.get('contact_sources')
       .then(this.extractData);
   },
+  getSpecificContact(contactId) {
+    return Vue.http.get(`contacts/${contactId}`)
+      .then(this.extractData)
+      .catch(this.extractData);
+  },
   addContact(data) {
     return Vue.http.post('contacts', data)
       .then(this.extractData)
