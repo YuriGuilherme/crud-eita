@@ -20,22 +20,22 @@
             <label for="">Origem do contato</label>
             <select name="origin" v-model="newContact.contact_source_id" required>
               <option value="" disabled>Selecione a origem do contato</option>
-              <option v-for="contact in contact_sources" v-bind:value="contact.id">{{contact.name}}</option>
+              <option v-for="contact in contact_sources" :key="contact.id" v-bind:value="contact.id">{{contact.name}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="">Sobre o contato</label>
-            <textarea name="about" v-model="newContact.background" id="" cols="30" rows="10" placeholder="Conte um pouco sobre como você o conheceu"></textarea>
+            <textarea name="about" v-model="newContact.background" cols="30" rows="10" placeholder="Conte um pouco sobre como você o conheceu"></textarea>
           </div>
           <div class="form-group">
             <label for="">Telefone</label>
-            <input type="text" name="phone" v-for="phone in newContact.phones" v-model="phone.number" placeholder="(11)98765-4321">
-            <button @click="AddPhoneNumber">Adicionar telefone</button>
+            <the-mask :mask="['(##) ####-####', '(##) #####-####']" type="text" name="phone" :key="index" v-for="(phone, index) in newContact.phones" v-model="phone.number" placeholder="(11)98765-4321" />
+            <button type="button" @click="AddPhoneNumber">Adicionar telefone</button>
           </div>
           <div class="form-group">
             <label for="">Email</label>
-            <input type="email" name="email" id="" v-for="email in newContact.emails" v-model="email.address" placeholder="exemplo@email.com">
-            <button @click="AddEmailAddress">Adicionar Email</button>
+            <input type="email" name="email" :key="index" v-for="(email, index) in newContact.emails" v-model="email.address" placeholder="exemplo@email.com">
+            <button type="button" @click="AddEmailAddress">Adicionar Email</button>
           </div>
           <div class="form-group">
             <button class="btn" type="submit">Salvar Contato</button>

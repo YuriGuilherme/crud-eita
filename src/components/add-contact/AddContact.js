@@ -1,3 +1,4 @@
+import { TheMask } from 'vue-the-mask';
 import service from '../../shared/service';
 
 const getDefaultData = () => {
@@ -25,6 +26,9 @@ const getDefaultData = () => {
 
 export default {
   data: getDefaultData,
+  components: {
+    TheMask,
+  },
   created() {
     this.getContactSources()
   },
