@@ -61,6 +61,7 @@ label {
   width: 100%;
   padding: 10px 20px;
   border-bottom: 1px solid #ddd;
+  color: #ff9632;
 }
 
 .form-group input,
@@ -69,6 +70,12 @@ label {
   width: 100%;
   margin-bottom: 10px;
 }
+
+.form-group.has-error input,
+.form-group.has-error select {
+  border-bottom-color: #ff9632;
+  background-color: rgba(255, 124, 0, .18);
+} 
 
 .form-group .btn {
   width: 100%;  
