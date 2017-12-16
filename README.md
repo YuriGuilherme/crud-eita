@@ -1,30 +1,92 @@
-# crud-eita
+# CRUD-EITA - Front-end
+> A Vue.js Front-end Test.
 
-> A Vue.js Front-end Test
+## Features
+- Add Contact
+- List Contacts
+- Show specific Contact
 
-## Build Setup
+## Additional features
+- Search contact by name
+- Find by starred or not starred contact
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+## Folder structure
+```sh
+├── assets
+│   ├── css
+│   │   └── styles.css // stylesheet of project
+│   └── fonts
+├── build // webpack settings
+├── dist // webpack build
+├── src // source code
+│   ├── components // dumbie components
+│   ├── core // basic application settings
+│   ├── router // application routes control
+│   ├── shared // service and filters
+│   └── store
+│       ├── modules // states, mutations, actions, getters methods of a component
+│       ├── index //store - vuex
+│       └── mutations-types // types of mutations supported by the modules
+├── index.html
+├── node_modules
+└── package.json
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Tools and Frameworks
+- ES6
+- Sass
+- VueJs
+- Vuex
+- Vue-cli
+- Webpack
+
+## Install dependencies
+```sh
+> npm install
+or
+> yarn install
+```
+## Running server at localhost:8080
+```sh
+> npm run dev
+or
+> yarn dev
+```
+
+## Tests
+#### run unit tests
+```sh
+> npm run unit
+or
+> yarn unit
+```
+#### run e2e tests
+```sh
+> npm run e2e
+or
+> yarn e2e
+```
+#### run all tests
+```sh
+> npm test
+or
+> yarn test
+```
+## Build
+```sh
+> npm run build
+or
+> yarn build
+```
+
+## TODO
+- [x] Add Contacts
+- [x] Form validation
+- [x] Mask input
+- [x] Implementation of Vuex
+- [x] Contacts listing
+- [x] Show specific contact
+- [x] Search contact by name
+- [x] Find by starred or not starred contact
+- [ ] Tests
